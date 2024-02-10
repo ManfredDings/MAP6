@@ -1,0 +1,17 @@
+INPUT(
+./debug/main.o
+./debug/mapmainwindow.o
+./debug/aufgabenliste.o
+./debug/aufgabe.o
+./debug/dialog.o
+./debug/mdutils.o
+./debug/aboutdlg.o
+./debug/helpbrowser.o
+./debug/qrc_mapressources.o
+./debug/moc_mapmainwindow.o
+./debug/moc_aufgabenliste.o
+./debug/moc_aufgabe.o
+./debug/moc_dialog.o
+./debug/moc_aboutdlg.o
+./debug/moc_helpbrowser.o
+);

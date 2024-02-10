@@ -1,0 +1,33 @@
+---------------------------------------------NEUE HOTKEYS
+Aufgabeneditor anzeigen: STRG + E
+Pickup Cueingpoint: Strg+P^
+Aufgabeneditor: Speichern Strg+Umsch+S
+Aufgabe in den Editor laden STRG + L
+
+Ändern: Zurück in Strg+B statt Strg+Z
+
+---------------------------------------------------------
+
+
+NOTIZPAD?
+
+Aufgabeneditor mit HTML-Vorschau?
+
+
+Eventuell Umschaltung Normal-/Zweibildschirmmodus, muss die Praxis zeigen
+
+
+................
+XML-Dateiformat?
+
+
+
+
+
+
+
+==========================================================
+
+MP3-Dateipfade relativ zur Lesson-Datei
+
+Datenmodell: alte Objekte deleten?

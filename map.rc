@@ -1,0 +1,27 @@
+#include "windows.h"
+
+IDI_ICON1               ICON    DISCARDABLE     "MainIcon.ico"
+
+    VS_VERSION_INFO VERSIONINFO
+     FILEVERSION 0,1,0,0
+     PRODUCTVERSION 0,1,0,0
+     FILEFLAGSMASK 0x3fL
+     FILEOS 0x40004L
+     FILETYPE 0x0L
+     FILESUBTYPE 0x0L
+    BEGIN
+        BLOCK "StringFileInfo"
+        BEGIN
+            BLOCK "040704b0"
+            BEGIN
+                VALUE "CompanyName", "AD"
+                VALUE "FileDescription", "MAP"
+                VALUE "FileVersion", "4.0.0.0"
+                VALUE "InternalName", ""
+                VALUE "LegalCopyright", "Copyright (C) 2014"
+                VALUE "OriginalFilename", ""
+                VALUE "ProductName", "MAP"
+                VALUE "ProductVersion", "4.0.0.0"
+            END
+        END
+    END
