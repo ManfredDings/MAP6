@@ -14,10 +14,12 @@
 #include "aufgabe.h"
 #include "dialog.h"
 #include "mdutils.h"
-#include "aboutdlg.h"
+#include "about.h"
+//#include "aboutdlg.h"
 #include "mdlistwidgetwithdrop.h"
 #include "mapmainwindow.h"
 #include "ui_mapmainwindow.h"
+#include <QDebug>
 
 
 // Max. Länge für die Pfade in der Statusleiste
@@ -324,6 +326,7 @@ void MapMainWindow::AufgabenlisteLaden(QString s)
     statuslabel2->clear();
     statuslabel->setText("");
     statuslabel2->setText("");
+    setInfo();
 }
 
 QString MapMainWindow::strippedName(const QString &fullFileName)
@@ -413,6 +416,43 @@ void MapMainWindow::resizeEvent(QResizeEvent *event)
     {
         int l = ui->hSlider->geometry().left();
         ui->hSlider->setFixedWidth(this->width()-2 * l);
+
+
+        const int spc = 5;
+        int statusbarheight = spc;
+        if (ui->statusBar->isVisible())
+        {
+            statusbarheight = ui->statusBar->height() + spc;
+        };
+
+        double fac = 1.0;
+        if (ui->lwAufgabenDetails->isVisible()){
+            fac = 1.8;
+        }
+
+        int aheight = (this->height()-ui->lwAufgaben->y()) / fac;
+
+        ui->lwAufgaben->setFixedHeight(aheight);
+
+        int diff = ui->listWidget->geometry().top() - ui->lwAufgaben->geometry().top();
+        ui->listWidget->setGeometry(ui->listWidget->geometry().left(),ui->listWidget->geometry().top(),
+                                    ui->listWidget->width(),ui->lwAufgaben->geometry().height()-diff);
+
+        int ay = ui->lwAufgaben->geometry().bottom();// +  aheight +1;
+        int ax = ui->lwAufgabenDetails->geometry().left();
+        int aw = ui->lwAufgabenDetails->geometry().width();
+        int ah = this->height() - statusbarheight - ay;
+        ui->lwAufgabenDetails->setGeometry(ax, ay, aw, ah);
+
+        l = ui->groupBox->geometry().left();
+        int t = ui->groupBox->geometry().top();
+        int h = this->height() - statusbarheight - ui->label_2->height() - t - spc ;
+        ui->groupBox->setFixedWidth(this->width()-l-2);
+        ui->groupBox->setFixedHeight(h);
+        ui->lblKommentare->setFixedWidth(ui->groupBox->geometry().width());
+
+        ui->lwAufgabenDetails->setGeometry(ax, ay, aw, ui->groupBox->geometry().bottom() - ay);
+
         QString s_html;
         if (showZweitfenster)
         {
@@ -443,6 +483,8 @@ void MapMainWindow::resizeEvent(QResizeEvent *event)
 void MapMainWindow::showEvent(QShowEvent *event)
 {
     QWidget::showEvent(event);
+    // Zweimal, sonst falsche Darstellung beim Programmstart
+    resizeEvent(0);
     resizeEvent(0);
 }
 
@@ -809,6 +851,8 @@ void MapMainWindow::setMaufgabendetailszeigen(bool value)
     ui->lwAufgabenDetails->setEnabled(maufgabendetailszeigen);
     ui->lwAufgabenDetails->setVisible(maufgabendetailszeigen);
     enableNavigationTeilaufgaben();
+    resizeEvent(0);
+    resizeEvent(0);
 }
 
 enStyles MapMainWindow::styles() const
@@ -1194,9 +1238,14 @@ void MapMainWindow::enableMenuesZweitfenster(bool enable)
 
 void MapMainWindow::on_action_ber_MAP_triggered()
 {
-    AboutDlg ab;
-    ab.setStyleSheet("background-image: url(:/splash.png)");
-    ab.exec();
+    About *ab = new About(this);
+    ab->setWindowFlag(Qt::Dialog);
+    ab->setModal(true);
+    ab->show();
+   // AboutDlg ab(this);
+   // ab.setModal(true);
+   // ab.setStyleSheet("background-image: url(:/splash.png)");
+   // ab.show();
 }
 
 void MapMainWindow::on_actionLauter_triggered()
@@ -1734,6 +1783,8 @@ void MapMainWindow::on_actionStatusleiste_triggered()
 {
     ui->statusBar->setVisible(!ui->statusBar->isVisible());
     ui->actionStatusleiste->setChecked(ui->statusBar->isVisible());
+    resizeEvent(0);
+    resizeEvent(0);
 }
 
 

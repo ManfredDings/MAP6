@@ -16,13 +16,13 @@
 /**************************************************
     *Dies regelmäßig anpassen
     */
-const QString CVERSIONSNUMMER ="5.01 2024-02-10";
+const QString CVERSIONSNUMMER ="5.1 2024-02-11";
 /* **********************************************/
 
 const QString CVERSIONSTEXT = "MAP "+
-        CVERSIONSNUMMER+QObject::tr("\nCreated with Qt 5.15.2 under LPGL3. "
+        CVERSIONSNUMMER+QObject::tr("\nCreated with Qt 6.1.6 under LPGL3. "
         "You received\n a copy of LGPL3 with this program.\n"
-        "Foto: Wikipedia (Audio mixer faders.jpg)");
+        "Foto: M. Dings (Orgel HfM Freiburg)");
 
 const QString SFileHelpIndex = "Help.html";
 const QString SHelpDirectory = "";

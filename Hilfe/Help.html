@@ -1,0 +1,371 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>Help</title>
+</head>
+<body>
+<h1 id='map'>MAP</h1>
+<p>MAP ist ein Programm zum Abspielen von wav- und mp3-Dateien, gekoppelt mit Kommentaren, Hinweistexten oder Höraufgaben, die nach einer bestimmten Zeitvorgabe gestartet werden. Die Hinweistexte können zusammen mit einer Uhr in einem zweiten Programmfenster dargestellt werden, das bei Bedarf auf einen zweiten Bildschirm geschoben werden kann und dort als &quot;always on top&quot; - Fenster über weiteren Inhalten (z. B. einer Präsentation) dargestellt werden kann.</p>
+<p>MAP für den Einsatz in Lehrveranstaltungen zur Höranalyse und zur Präsentation von Musikbeispielen in Vorlesungen und dergleichen entwickelt.</p>
+<p>Die Benutzung von MAP geschieht auf eigene Gefahr. © 2016 by Manfred Dings. <a href='#Lizenz'>Lizenz</a>.</p>
+<h3 id='inhaltsübersicht'>Inhaltsübersicht</h3>
+<p><a href='#Programmkonzept'>Programmkonzept und erste Schritte</a></p>
+<p><a href='#Menubefehle'>Menübefehle</a></p>
+<p><a href='#Programmoberflache'>Die Programmoberfläche</a></p>
+<p><a href='#anhang'>Anhang</a></p>
+<p><a name="Programmkonzept"></a></p>
+<h1 id='programmkonzept-und-erste-schritte'>Programmkonzept und erste Schritte</h1>
+<p>Programmkonzept und erste Schritte
+MAP spielt wie ein üblicher MP3-Player wav- und mp3-Dateien ab (<a href='#FormatSounddateien'>Hinweise zum mp3-Dateiformat</a> beachten). Bei der Wiedergabe läuft eine Uhr mit, zusätzlich lassen sich Hinweise zu exakt definierbaren Zeitpunkten einblenden. Dazu sind benötigt das Programm ein abgestuftes System von Dateien: sog. <a href='#aufgabenlisten'>Aufgabenlisten</a> und <a href='#aufgabendateien'>Aufgabendateien</a>, beides einfache Textdateien, die sich in jedem Editor bearbeiten lassen, bei Bedarf auch <a href='#BefehleImMenuAufgabeneditor'>im Programm selber</a>. <a href='#aufgabenlisten'>Aufgabenlisten</a> (*.<code>afl</code>) bilden dabei so etwas wie Playlisten. Sie enthalten die Dateinamen von Aufgabendateien (<code>*.auf</code>), die sich im selben Verzeichnis wie die Aufgabenliste selbst befinden müssen. Hier ein Beispiel für den Inhalt einer Aufgabendatei:</p>
+<pre><code>Aufgabe01.auf
+Aufgabe02.auf
+Aufgabe03.auf
+Aufgabe04.auf
+Aufgabe04a.auf
+</code></pre>
+<p>Mit dem Menübefehl <a href='#AufgabenlisteLaden'>Aufgabenliste Laden (F2)</a> wird eine solche Aufgabenliste eingelesen. Im Listenfeld links im Programmfenster werden die Beschreibungen der Aufgabendateien sichtbar und können dort per Menübefehl oder durch Mausklick ausgewählt werden.</p>
+<p><img src="Programmfenster.png" alt="Programmfenster" width ="1150" /></p>
+<p>Die Aufgabendateien wiederum enthalten einen Aufgabentitel, den relativen Pfad zu einer wav- oder mp3-Datei sowie optional Zeitmarken, zu denen Hinweistexte im Programmfenster bzw. im Zweitfenster dargestellt werden können. Ein Beispiel für eine Aufgabendatei:</p>
+<pre><code>Klangbeispiel 1.1: Mozart, Quartett A-dur KV 464 I Exposition#\wav\MozartQuartettAKV464IExposition.mp3
+0#&lt;h1&gt;Themen/Themenfreie Abschnitte&lt;/h1&gt;&lt;p&gt;Fest und locker gefügt?&lt;p&gt;&lt;ul&gt;&lt;li&gt;Motive?&lt;/li&gt;&lt;/ul&gt;
+</code></pre>
+<p>Der erste Eintrag in der ersten Zeile bildet die Beschreibung der Aufgabe, die im Programm in der Liste dargestellt wird. Nach dem Trennzeichen # steht der relative Pfad zur Mediendatei. Sie kann im selben Verzeichnis wie die Aufgabenliste liegen oder - wie im Beispiel - in einem Unterverzeichnis.
+Alle weiteren Zeilen blenden zu einem gegeben Zeitpunkt (im Beispiel 0 Sekunden) den nachfolgend gegebenen Text ein. Dieser Text ist vorzugsweise in HTML formuliert (hier also mit einer Überschrift, einem Absatz und einer Aufzählungliste mit einem Aufzählungspunkt).
+Alle Dateien sind reine Textdateien und können in jedem beliebigen Texteditor erstellt und bearbeitet werden, Aufgabendateien auch im internen <a href='#BefehleImMenuAufgabeneditor'>Aufgabeneditor</a> rechts im Programmfenster.
+Aufgabendateien werden mit den einschlägigen Schaltflächen bzw. Befehlen im Menü <a href='#BefehleImMenuPlayer'>Player</a> abgespielt, pausiert oder angehalten. Zudem lassen sich Cueing-Marken setzen, also Zeitmarken, von denen aus die Sounddateien gestartet ewerden können. Auch die Wiedergabelautstärke lässt sich einstellen sowie ein automatisches Fading vornehmen.
+Mit den Befehlen im Menü <a href='#BefehleImMenuCueing'>Cueing</a> lassen sich Zeitmarken setzen und ansteuern. Diese Zeitmarken sind unabhängig von der gerade geladenen Aufgabenliste bzw. Aufgabe.</p>
+<p><a name="Menubefehle"></a></p>
+<h1 id='menübefehle'>Menübefehle</h1>
+<h2 id='befehle-im-menü-datei'>Befehle im Menü Datei</h2>
+<h3 id='aufgabenliste-laden-strgf2'>Aufgabenliste laden (Strg+F2)</h3>
+<p>Mit diesem Befehl öffnen sie eine vorhandene <a href='#aufgabenlisten'>Aufgabenliste</a>. Die vorhandene Datei wird ohne Nachfrage geschlossen.
+Das gleiche bewirkt der Button <code>Liste neu laden</code>.</p>
+<p>Eine Aufgabenliste kann auch per Drag and Drop aus dem Windows-Explorer heraus auf das Programmfenster gezogen werden und wird dann genauso geladen, wie wenn sie mit dem Befehl <a href='#AufgabeHinzufuegen'>Aufgabe hinzufügen</a> geladen worden wäre.</p>
+<p><a name="AufgabenlisteNeuLaden"></a></p>
+<h3 id='aufgabenliste-neu-laden'>Aufgabenliste neu laden</h3>
+<p>Mit diesem Befehl wird die aktuell geladene <a href='#aufgabenlisten'>Aufgabenliste</a> neu geladen. Dies ist beispielsweise dann sinnvoll, wenn <a href='#aufgabendateien'>Aufgabendateien</a> mit einem externen Editor oder dem internen <a href='#BefehleImMenuAufgabeneditor'>Aufgabeneditor</a> verändert wurden.
+Erst nach dem Neueinlesen werden die Änderungen in den veränderten <a href='#aufgabendateien'>Aufgabendateien</a> übernommen.</p>
+<p><a name="AufgabenlisteSpeichern"></a></p>
+<h3 id='aufgabenliste-speichern-umschf2'>Aufgabenliste speichern (Umsch+F2)</h3>
+<p>Dieser Befehl speichert die aktuell geöffnete <a href='#aufgabenlisten'>Aufgabenliste</a>. Das gleiche bewirkt der Button <code>Liste speichern</code>.</p>
+<h3 id='aufgabenliste-speichern-als'>Aufgabenliste speichern als...</h3>
+<p>Dieser Befehl speichert die aktuell geladene <a href='#aufgabenlisten'>Aufgabenliste</a> unter einem anderen Dateinamen.</p>
+<h3 id='leere-aufgabenliste'>Leere Aufgabenliste</h3>
+<p>Dieser Befehl schließt eine vorhandene <a href='#aufgabenlisten'>Aufgabenliste</a> ohne Nachfrage, legt eine neue an und öffnet einen Dialog zur Vergabe eines Dateinamens.
+Die Aufgabenliste ist anschließend leer, bis <a href='#aufgabendateien'>Aufgabendateien</a> hinzugefügt werden.</p>
+<h3 id='aufgabe-löschen-entf'>Aufgabe löschen (Entf)</h3>
+<p>Dieser Befehl löscht die aktuell marktierte bzw. abgespielte Aufgabendatei aus der Aufgabenliste. Die Liste ist anschließend ungesichert und muss bei Bedarf gespeichert werden.
+Das gleiche bewirkt der Button <code>Aufgabe löschen</code>.</p>
+<h3 id='aufgabe-nach-oben-strgumschhoch'>Aufgabe nach oben (Strg+Umsch+Hoch)</h3>
+<p>Mit diesem Befehl wird die aktuell markierte und verwendete Aufgabe in der <a href='#aufgabenlisten'>Aufgabenliste</a> aufwärts verschoben. Das gleiche bewirkt der Button <code>Nach oben</code>. Die Aufgabenliste ist dadurch verändert und muss manuell <a href='#AufgabenlisteSpeichern'>gespeichert</a> werden.</p>
+<h3 id='aufgabe-nach-unten-strgumschherunter'>Aufgabe nach unten (Strg+Umsch+Herunter)</h3>
+<p>Mit diesem Befehl wird die aktuell markierte und verwendete Aufgabe in der <a href='#aufgabenlisten'>Aufgabenliste</a> aubärts verschoben. Das gleiche bewirkt der Button <code>Nach unten</code>. Die Aufgabenliste ist dadurch verändert und muss manuell <a href='#AufgabenlisteSpeichern'>gespeichert</a> werden.</p>
+<p><a name="AufgabeHinzufuegen"></a></p>
+<h3 id='aufgabe-hinzufügen'>Aufgabe hinzufügen</h3>
+<p>Dieser Befehl ruft einen Dateiauswahldialog auf, in dem Sie eine bestehende <a href='#Aufgabendatei'>Aufgabendatei</a> auswählen können. Diese wird der aktuell geladenen Aufgabenliste am Ende angefügt. Das gleiche bewirkt der Button <code>Aufg. hinzufügen</code>.  Die <a href='#Aufgabenliste'>Aufgabenliste</a> ist dadurch verändert und muss manuell <a href='#AufgabenlisteSpeichern'>gespeichert</a> werden.
+Eine <a href='#Aufgabendatei'>Aufgabendatei</a> kann auch per Drag and Drop aus dem Dateimanager heraus auf das Programmfenster gezogen werden und wird dann genauso zur <a href='#Aufgabenliste'>Aufgabenliste</a> hinzugefügt, wie wenn sie mit dem Befehl <code>Aufgabe hinzufügen</code> geladen worden wäre.</p>
+<h3 id='aufgabenliste-bearbeiten'>Aufgabenliste bearbeiten</h3>
+<p>Dieser Befehl ruft den auf Ihrem Betriebssystem eingerichteten Standardeditor mit der aktuell geladenen <a href='#aufgabenlisten'>Aufgabenliste</a> auf, welche auf diese Weise manuell editiert werden kann.</p>
+<h3 id='aufgabe-bearbeiten'>Aufgabe bearbeiten</h3>
+<p>Dieser Befehl ruft den auf Ihrem Betriebssystem eingerichteten Standardeditor mit der Datei der aktuell marktierten <a href='##Aufgabendatei'>Aufgabe</a> auf, welche auf diese Weise manuell editiert werden kann. Alternativ können Aufgaben auch mit dem <a href='#BefehleImMenuAufgabeneditor'>programmeigenen Editor</a> bearbeitet werden.</p>
+<h3 id='in-explorer-zeigen'>In Explorer zeigen</h3>
+<p>Dieser Befehl öffnet den Explorer mit dem Verzeichnis und der Ansicht der gerade aktiven (markierten, abgespielten) <a href='##Aufgabendatei'>Aufgabendatei</a>).</p>
+<h3 id='beenden-f4'>Beenden (F4)</h3>
+<p>Dieser Befehl beendet MAP sofort. Es erfolgt keine Nachfrage, ob ungesicherte Dateien (Aufgabenliste, Aufgaben) gespeichert werden sollen.</p>
+<p><a name="BefehleImMenuPlayer"></a></p>
+<h2 id='befehle-im-menü-player'>Befehle im Menü Player</h2>
+<h3 id='play-bzw-pause-strgleertaste'>Play bzw. Pause (Strg+Leertaste)</h3>
+<p>Dies startet die Wiedergabe der Audiodatei aus der aktuell ausgewählten <a href='#aufgabendateien'>Aufgabe</a>. Dadurch wandelt sich der Menübefehl in den Befehl Pause und umgekehrt. Den gleichen Effekt erreicht man auch durch Betätigen des Buttons im Player.</p>
+<h3 id='stop-strgs'>Stop (Strg+S)</h3>
+<p>Dies beendet die Wiedergabe der <a href='#FormatSounddateien'>Audiodatei</a> aus der aktuell ausgewählten Aufgabe. Den gleichen Effekt erreicht man auch durch Betätigen des Stop-Buttons im Player.</p>
+<p><a name="BefehleImMenuCueing"></a></p>
+<h3 id='vor-strgn-bzw-zurück-strgb'>Vor (Strg+N) bzw. Zurück (Strg+B)</h3>
+<p>Dies ruft die nächste bzw. vorherige <a href='#aufgabendateien'>Aufgabe</a> der aktuell geladenen <a href='#aufgabenlisten'>Aufgabeliste</a> auf.</p>
+<h3 id='nächste-teilaufgabe-strgumschn-bzw-vorherige-teilaufgabe-strgumschb'>Nächste Teilaufgabe (Strg+Umsch+N) bzw. vorherige Teilaufgabe (Strg+Umsch+B)</h3>
+<p>Bei  <a href='#aufgabendateien'>Aufgaben</a> mit Zeitmarkierungen (quasi Teilaufgaben) springt dies die Zeitmarkierung nach bzw. vor der aktuellen an. Sofern der Player im Stop- oder Pause-Modus ist, wird lediglich die Zeitmarkierung angesprungen. Läuft eine Wiedergabe, so springt diese unmittelbar an die Zeitmarke.</p>
+<h3 id='lauter-strg--bzw-leiser-strg--'>Lauter (Strg+ +) bzw. Leiser (Strg+ -)</h3>
+<p>Erhöhet bzw. senkt die Lautstärke der Wiedergabe</p>
+<p><a name="FadeIn"></a></p>
+<h3 id='fade-in-strgi'>Fade in (Strg+I)</h3>
+<p>Setzt die Wiedergabelautstärke auf die Standardlautstärke. Der Befehl ist nur wählbar, wenn zuvor ein <a href='#FadeOut'>Fade out</a> eingeleitet wurde.</p>
+<p><a name="FadeOut"></a></p>
+<h3 id='fade-out-strgf'>Fade out (Strg+F)</h3>
+<p>Blendet die laufende Wiedergabe aus, wodurch der  Lautstärkeregler auf 0 gefahren wird. Der Befehl ist nur anwählbar, wenn die Wiedergabelautstärke nicht auf 0% steht.</p>
+<h3 id='fading-anhalten-strgh'>Fading anhalten (Strg+H)</h3>
+<p>Damit wird ein laufender Fadingprozess (<a href='#FadeIn'>Fade in</a> oder <a href='#FadeOut'>out</a>) angehalten. Der Befehl steht nur dann zur Verfügung, wenn zuvor ein Fading eingeleitet worden und noch nicht abgeschlossen ist.</p>
+<p><a name="StandardvolumeFestlegen"></a></p>
+<h3 id='standardvolume-festlegen-strgv'>Standardvolume festlegen (Strg+V)</h3>
+<p>Damit wird der Wiedergabepegel festgelegt, zu dem ein <a href='#FadeIn'>Fade in</a> erfolgen soll. Es wird der gerade eingestellte Pegel verwendet.</p>
+<h3 id='standardvolumen-anwenden-strg-'>Standardvolumen anwenden (Strg+ #)</h3>
+<p>Damit wird der Wiedergabepegel auf den festgelegten <a href='#StandardvolumeFestlegen'>Standardpegel</a> eingestellt.</p>
+<h3 id='mute-strg-m'>Mute (Strg+ M)</h3>
+<p>Stummschaltung oder Aufhebung der Stummschaltung, unterbindet die Weiterleitung des Signals an die Ausgabe, unabhängig vom Wiedergabezustand des Players.</p>
+<h3 id='ganzton-höher--ganzton-tiefer-f8-f12'>Ganzton höher .. Ganzton tiefer (F8-F12)</h3>
+<p>Damit wird die Wiedergabe beschleunigt oder abgebremst, was mit einer Tonhöhenänderung verbunden ist. Für jeden Befehl sind Tastenkürzel definiert:</p>
+<ul>
+<li>Ganzton höher (F12)</li>
+<li>Halbton höher (F11)</li>
+<li>Normales Tempo (F10)</li>
+<li>Ganzton tiefer (F9)</li>
+<li>Halbton tiefer (F8)</li>
+
+</ul>
+<h2 id='befehle-im-menü-cueing'>Befehle im Menü Cueing</h2>
+<h3 id='zu-cuingpoint-gehen-umschleertaste'>Zu Cuingpoint gehen (Umsch+Leertaste)</h3>
+<p>Damit wird die Wiedergabeposition auf die Zeit gesetzt, welche im Eingabefeld <a href='#EingabefeldCue'>Cue</a> vorgemerkt ist. Der Befehl kann nur dann angewendet werden, wenn dort ein gültiger Zeitpunkt angegeben ist.</p>
+<p><a name="Pickup"></a></p>
+<h3 id='pickup-strgumschleertaste'>Pickup (Strg+Umsch+Leertaste)</h3>
+<p>Damit wird die aktuelle Wiedergabeposition in das <a href='#EingabefeldCue'>Eingabefeld Cue</a> eingetragen sowie der <a href='#Cuingliste'>Cuingliste</a> hinzugefügt.</p>
+<h3 id='liste-löschen'>Liste Löschen</h3>
+<p>Dies löschte die <a href='#Cuingliste'>Cuingliste</a>.	</p>
+<p><a name="AufgabenlisteLaden"></a></p>
+<h3 id='aufgabenliste-laden-f2'>Aufgabenliste laden (F2)</h3>
+<p>Mit diesem Befehl öffnen sie eine vorhandene <a href='#Aufgabenliste'>Aufgabenliste</a>. Die vorhandene Datei wird ohne Nachfrage geschlossen.
+Das gleiche bewirkt der Button Liste neu laden.
+Eine Aufgabenliste kann auch per Drag and Drop aus dem Dateimanager heraus auf das Programmfenster gezogen werden und wird dann genauso geladen, wie wenn sie mit dem Befehl Aufgabe hinzufügen geladen worden wäre.</p>
+<p><a name="BefehleImMenuAnsicht"></a></p>
+<h2 id='befehle-im-menü-ansicht'>Befehle im Menü Ansicht</h2>
+<h3 id='menüleiste-esc'>Menüleiste (Esc)</h3>
+<p>Dies blendet die Menüleiste aus. Vorsicht: Die Menüleiste lässt sich anschließend nur über den Tastaturbefehl (<code>Esc</code>-Taste) wieder einblenden oder über das Kontextmenü, das mit der sekundären Maustaste (also meist der rechten) eingeblendet werden kann.</p>
+<h3 id='statusleite-umschesc'>Statusleite (Umsch+Esc)</h3>
+<p>Blendet die Statusleiste unten im Programmfenster ein- oder aus.</p>
+<h3 id='audiodateiinfos-zeigen-f6'>Audiodateiinfos zeigen (F6)</h3>
+<p>Dies blendet in der Statusleiste den Pfad zur Audiodatei ein bzw. aus, welche der ausgewählten <a href='#aufgabendateien'>Aufgabe</a> zugehörig ist.</p>
+<h3 id='aufgabendateiinfos-zeigen-umschf6'>Aufgabendateiinfos zeigen (Umsch+F6)</h3>
+<p>Dies blendet in der Statusleiste den Pfad zur <a href='#aufgabendateien'>Aufgabendatei</a> ein bzw. aus, welche der ausgewählten Aufgabe zugehörig ist.</p>
+<h3 id='aufgabendetails-zeigen-strgf6'>Aufgabendetails zeigen (Strg+F6)</h3>
+<p>Dies blendet die Liste mit den Detailinformationen zur aktuell geladenen gewählten Aufgabe ein bzw. aus.</p>
+<h3 id='kommentare-zeigen-strgk'>Kommentare zeigen (Strg+K)</h3>
+<p>Dies blendet die Anzeige von Kommentaren ein bzw. aus, welche in der aktuell wiedergegebenen <a href='#aufgabendateien'>Aufgabendatei</a> hinterlegt wurden. Kommentare werden nur angezeigt, wenn die Wiedergabe aktiv ist bzw. pausiert, nicht, wenn sie gestoppt ist.</p>
+<h3 id='mit-zweitfenster-synchronisieren-strgf3'>Mit Zweitfenster synchronisieren (Strg+F3)</h3>
+<p>Dies synchronisiert die Größe der Anzeige der Aufgabeninformationen mit der des Zweitfensters (Popupfensters). Ist die Option nicht ausgewählt, wird passt sich die Größe dem Programmfenster an.</p>
+<h3 id='normalansicht-strgumscha'>Normalansicht (Strg+Umsch+A)</h3>
+<p>Setzt die Fenstergröße auf eine vorgegebene, sinnvolle Größe, die alle benötigten Elemente darstellt.</p>
+<h3 id='lektionsansicht-strgumschl'>Lektionsansicht (Strg+Umsch+L)</h3>
+<p>Die setzt die Fenstergröße auf eine kleinere Höhe, die insbesondere die Anzeige der Aufgabendetails ausblendet. Dies ist sinnvoll, wenn lediglich ein Bildschirm verwendet wird und bestimmte Informationen zur aktuellen Aufgabe vor dem Auditorium verborgen bleiben sollen.</p>
+<h3 id='leinwand-löschen-strgl'>Leinwand löschen (Strg+L)</h3>
+<p>Wenn der Player pausiert, werden mit diesem Befehl die der aktuellen Wiedergabeposition zugeordneten Detailinformationen zur Aufgabe ausgeblendet. Bei Fortsetzung der Wiedergabe erscheinen sie erneut. In der Stoppposition des Players verschwinden sie abhängig vom Status des Menübefehls <a href='#BeiStopLeinwandLoeschen'>Bei Stop Leinwand löschen (F4)</a> (oder bleiben ggf. erhalten).</p>
+<p><a name="BeiStopLeinwandLoeschen"></a></p>
+<h3 id='bei-stop-leinwand-löschen-f4'>Bei Stop Leinwand löschen (F4)</h3>
+<p>Wenn dieser Menübefehl aktiviert ist (angehakt), so bleibt der bei der letzten Wiedergabe dargestellte Detailtext zu einer Aufgabe erhalten. Möchte man dieses Verhalten vermeiden (leere Leinwand bei Stoppen des Players), so kann dies mit dem Menübefehl oder <code>F4</code> umgeschaltet werden.  </p>
+<h3 id='kein-aufgabentext-f7'>Kein Aufgabentext (F7)</h3>
+<p>Dies blendet die Darstellung der Detailinformationen zur aktuell laufenden Ausgabe ein oder aus.</p>
+<h3 id='keine-stoppuhr-strgf7'>Keine Stoppuhr (Strg+F7)</h3>
+<p>Dieses blendet die Uhrzeitangabe der laufenden Wiedergabe aus. Der Anzeigetext zur Aufgabe bleibt erhalten.</p>
+<h3 id='hfm-stile'>Hfm-Stile</h3>
+<p>Dies schaltet Farben ein, die zu einem bestimmten Skin in den Lehrveranstaltungen des Verfassers passen (gelber Hintergrund).</p>
+<h3 id='windows-stil'>Windows-Stil</h3>
+<p>Dies schaltet das die Farbeinstellungen von Windows-Installation ein bzw. aus.</p>
+<h3 id='schriftart'>Schriftart...</h3>
+<p>Dies ruft einen Schriftauswahldialog aus, mit dem sich der Font für die Aufgabeninhalte festlegen lässt.</p>
+<p><a name="BefehleImMenuZweitfenster"></a></p>
+<h2 id='befehle-im-menü-zweitfenster'>Befehle im Menü Zweitfenster</h2>
+<p>Das &quot;Zweitfenster&quot; oder &quot;Popupfenster&quot; dient zur Darstellung der Stoppuhr und der Aufgabeninhalte auf einem zweiten Monitor. Es zeigt die gleichen Angaben, die auch im Hauptfenster erscheinen. Seine Größe und Position können unabhängig vom Programmfenster festgelegt werden. Insbesondere kann es auf einen zweiten Monitor bzw. den Beamer bewegt werden.</p>
+<h3 id='popupfenster-f3'>Popupfenster (F3)</h3>
+<p>Dieser Befehl blendet das Zweitfenster ein- oder aus. Dass es ausgeblendet ist, ist daran erkennbar, dass die Stoppuhr im Hauptfenster in <em>kursiver Schriftart</em> dargestellt wird.</p>
+<h3 id='standardgröße-f5'>Standardgröße (F5)</h3>
+<p>Dies verändert die Größe des Zweitfensters auf einen Standardwert.</p>
+<h3 id='stoppuhransicht-abschalten-strgf5'>Stoppuhransicht abschalten (Strg+F5)</h3>
+<p>Dies schalte die Anzeige der Wiedergabezeit im Zweitfenster ein oder aus.</p>
+<h3 id='veränderung-der-größe-und-position-des-zweitfensters'>Veränderung der Größe und Position des Zweitfensters</h3>
+<p>Die geht umständlich über die nachfolgend genannten Menübefehle, komfortabler jedoch per Tastenkombination.</p>
+<h4 id='ändern-der-größe'>Ändern der Größe:</h4>
+<ul>
+<li>Enger (Alt+links)</li>
+<li>Weiter (Alt+rechts)</li>
+<li>Kleiner (Alt+auf)</li>
+<li>Größer(Alt+ab)</li>
+
+</ul>
+<h4 id='ändern-der-position-fein-kleinschrittig'>Ändern der Position (fein, kleinschrittig)</h4>
+<ul>
+<li>Nach rechts (Strg+rechts)</li>
+<li>Nach links (Strg+links)</li>
+<li>Nach oben (Strg+auf)</li>
+<li>Nach unten (Strg+ab)</li>
+
+</ul>
+<h4 id='ändern-der-position-grob-schnell'>Ändern der Position (grob, schnell)</h4>
+<ul>
+<li>Schnell rechts (Alt+Umsch+rechts)</li>
+<li>Schnell links (Alt+Umsch+links)</li>
+<li>Schnell oben (Alt+Umsch+auf)</li>
+<li>Schnell unten (Alt+Umsch+ab)</li>
+
+</ul>
+<h3 id='fenster-zurückholen-strgrücktaste'>Fenster zurückholen (Strg+Rücktaste)</h3>
+<p>Die befördert das Zweitfenster an die äußerste linke obere Position, also auf den Hauptbildschirm zurück.</p>
+<h3 id='hfm-stil'>HfM-Stil</h3>
+<p>Schaltet unabhängig vom Stil des Hauptfensters die Farbauswahl des in den Lehrveranstaltungen des Verfassers passenden Skins ein (gelber Hintergrund).</p>
+<h3 id='stil-des-hauptfensters'>Stil des Hauptfensters</h3>
+<p>Ist diese Option aktiviert, so übernimmt das Zweitfenster den im Hauptfenster aktivierten Stil.</p>
+<p><a name="BefehleImMenuAufgabeneditor"></a></p>
+<h2 id='befehle-im-menü-aufgabeneditor'>Befehle im Menü Aufgabeneditor</h2>
+<p>Die Befehle dieses Menüs sind überwiegend auch über Schaltfläche im Editorbereich erreichbar. Wird eine Aufgabe bearbeitet, so muss sie anschließend unbedingt gespeichert werden. Dies geschieht nicht automatisch. Auch beim Beenden des Programms wird im Falle einer veränderten Datei <em>nicht</em> zum Speichern aufgefordert. Änderungen gehen daher möglicherweise verloren, wenn nicht manuell gespeichert wurde.</p>
+<p>Wurde eine Aufgabe verändert und gespeichert, wird die aktuell geladene <a href='#aufgabenlisten'>Aufgabenliste</a> <em>nicht</em> aktualisiert. Dies muss <a href='#AufgabenlisteNeuLaden'>manuell</a> erfolgen.</p>
+<h3 id='editor-anzeigen-strge'>Editor anzeigen (Strg+E)</h3>
+<p>Dies blendet den programmeigenen Aufgabeneditor ein bzw. aus. </p>
+<h3 id='aufgabe-in-editor-laden-strgl'>Aufgabe in Editor laden (Strg+L)</h3>
+<p>Dies läd die aktuell ausgewählte Aufgabe in den Editor. Die gleiche Wirkung hat die Schaltfläche <code>Aufgabe laden</code> im Editorbereich.  Dort kann sie wie in jedem üblichen Texteditor bearbeitet und anschließend bei Bedarf <a href='#AufgabeSpeichern'>gespeichert</a> werden.</p>
+<p><a name="AufgabeSpeichern"></a></p>
+<h3 id='aufgabe-speichern-strgumschs'>Aufgabe speichern (Strg+Umsch+S)</h3>
+<p>Speichert die Änderungen an der aktuell im Aufgabeneditor geladenen Aufgabe. Die gleiche Wirkung hat die Schaltfläche <code>Aufgabe speichern</code> im Editorbereich.</p>
+<h3 id='aufgabe-speichern-unter'>Aufgabe speichern unter...</h3>
+<p>Speichert die Änderungen an der aktuell im Aufgabeneditor geladenen Aufgabe unter Abfrage eines neuen Dateinamens. Die Erweiterung für <a href='#aufgabendateien'>Aufgabendateien</a> muss <code>.auf</code> sein.</p>
+<p>Die gleiche Wirkung hat die Schaltfläche <code>Speichern unter...</code> im Editorbereich.</p>
+<h3 id='aufgabe-schließen'>Aufgabe schließen</h3>
+<p>Blendet eine im Editorbereich geladene Aufgabe wieder aus. Die gleiche Wirkung hat die Schaltfläche <code>Aufgabe schließen</code> im Editorbereich.</p>
+<h2 id='befehle-im-menü-hilfe'>Befehle im Menü Hilfe</h2>
+<h3 id='hilfe-f1'>Hilfe (F1)</h3>
+<p>Ruft diese Online-Hilfe auf.</p>
+<h3 id='internen-hilfebrowser-verwenden'>Internen Hilfebrowser verwenden</h3>
+<p>Dies schaltet ein bzw. aus, dass die Hilfe-Datei über die programmeigene Hilfefunktion dargestellt wird. Anderenfalls erfolgt die Darstellung über das Standardprogramm, das im Betriebssystem konfiguriert wurde.</p>
+<p>Schlägt letzteres - aus welchen Gründen auch immer - fehl, so wird stets der interne Browser von MAP verwendet.</p>
+<h3 id='über-map'>Über MAP</h3>
+<p>Ruft einen Dialog mit Informationen zum Programm und zur aktuellen Version auf.</p>
+<p><a name="Programmoberflaeche"></a></p>
+<h1 id='die-programmoberfläche'>Die Programmoberfläche</h1>
+<p>Im Programmfenster ist ein Kontextmenü verfügbar (Klicken mit der sekundären Maustaste).</p>
+<p>Aufgabenlisten und Aufgabendateien können per Drag und Drop geladen werden (aus dem Explorer in das Programmfenster ziehen).</p>
+<p>Etliche Menübefehle können über Buttons erreicht werden. Wichtige Funktionen sind über Schieberegler verfügbar:</p>
+<ul>
+<li>Die Lautstärke wird über den senkrechten Schieberegler links neben der Uhr eingestellt.</li>
+<li>Die aktuelle Wiedergabeposition kann manuell über den horizontalen Schieberegler festgesetzt werden. Dieser zeigt auch die laufende Wiedergabeposition an.</li>
+
+</ul>
+<p><img src="Oberflaeche.png" alt="Oberflaeche" WIDTH=1100 /></p>
+<p>Die sekundäre Maustaste (meist also die rechte) ruft ein Kontextmenü auf.</p>
+<p><a name="EingabefeldCue"></a></p>
+<h3 id='das-eingabefeld-cue'>Das Eingabefeld Cue</h3>
+<p>Hier geben Sie einen Zeitpunkt ein, zu dem die Wiedergabeposition springen soll. Das Format ist <code>mm:ss[,xxx]</code> (z. B. 01:23 oder <code>01:23,456</code>. Die Zehntel bis Tausendstelsekundenangabe ist fakultativ. Neben der manuellen Eingabe kann auch ein Doppelklick auf die Cuingliste erfolgen oder die Anwendung des Befehls <a href='#Pickup'>Pickup (Strg+Umsch+Leertaste)</a>.</p>
+<p><a name="Cuingliste"></a></p>
+<h3 id='die-cuingliste'>Die Cuingliste</h3>
+<p>Hier lassen sich verschiedene Zeitpunkte (aufsteigend sortiert) speichern, welche per Doppelklick in das <a href='#EingabefeldCue'>Cuing-Eingabefeld</a> geschrieben werden können. Die Einträge können entweder </p>
+<ul>
+<li>mit dem Befehl <a href='#Pickup'>Cuing|Pickup (Strg+Umsch+Leertaste)</a> erfolgen,</li>
+<li>über den Button <code>Pickup</code></li>
+<li>oder indem der aktuelle Eintrag im <a href='#EingabefeldCue'>Cuing-Eingabefeld</a> über den Button Add in die Liste geschrieben wird.</li>
+
+</ul>
+<p>Mit Hilfe der Taste <code>Entf</code> kann ein markierter Eintrag gelöscht werden. Der Button <code>Clear</code> oberhalb der Liste leert diese insgesamt.</p>
+<h2 id='das-zweitfenster'>Das Zweitfenster</h2>
+<p>Das Zweitfenster zeigt - je nach Einstellungen im Menü <a href='#BefehleImMenuAnsicht'>Ansicht</a> - die laufende Zeitanzeige und Hinweistexte zur aktuell geladenen und abgespielten <a href='#Aufgabendatei'>Aufgabendatei</a>. Mit den Befehlen im Menü <a href='#BefehleImMenuZweitfenster'>Zweitfenster</a> kann es ein-/bzw. ausgeblendet, verschoben und in der Größe angepasst werden. Insbesondere lässt es sich auf einen Zweitbildschirm verschieben.
+Das Zweitfenster wird als &quot;always on top&quot;-Fenster immer über allen anderen Fenstern in Windows dargestellt und verdeckt somit darunter befindliche Inhalte.</p>
+<p><a name="Anhang"></a></p>
+<h1 id='anhang'>Anhang</h1>
+<p><a name="Aufgabenlisten"></a></p>
+<h2 id='aufgabenlisten'>Aufgabenlisten</h2>
+<p>Aufgabenlisten sind einfache Textdateien, welche eine Folge von Aufgabendateien enthalten. Aufgabenlisten müssen die Erweiterung &quot;*.afl&quot; besitzen. Pro Zeile verweisen sie auf eine Aufgabendatei, die sich im selben Verzeichnis befinden muss, beispielsweise so:</p>
+<pre><code>aufgabe1.auf
+aufgabe2.auf
+aufgabe3.auf
+</code></pre>
+<p>Wenn die Datei geladen wird, erscheinen die Aufgaben im Hauptfenster und können nacheinander abgespielt werden.</p>
+<p><a name="Aufgabendateien"></a></p>
+<h2 id='aufgabendateien'>Aufgabendateien</h2>
+<p>Aufgabendateien sind einfache Textdateien, welche die Informationen über die abzuspielende wav- oder mp3-Datei enthalten sowie optional Zeitmarken definieren können, zu denen bestimmte Informationen angezeigt werden können.
+Eine Aufgabendatei kann folgendermaßen aussehen:</p>
+<pre><code>Vier extrem bekannte Werke#Musikrätsel extrem.mp3
+0#Vier extrem bekannte Werke#Werk 1#l
+0:46#Vier extrem bekannte Werke#Werk 2#l
+1:32#Vier extrem bekannte Werke#Werk 3#l
+2:33#Vier extrem bekannte Werke#Werk 4#l
+</code></pre>
+<p>In Zeile 1 befindet sich ein Titelhinweis, der in MAP angezeigt wird, dann als Trennzeichen das # und schließlich der Dateiname bzw. relative Dateipfad der mp3 oder wav-Datei. Diese kann sich in einem beliebigen Unterverzeichnis (allerdings nicht in einem übergeordneten Verzeichnis) befinden. Im Beispiel oben liegt die abzuspielende Datei <code>KlassikerDerModerne.mp3</code> im Unterverzeichnis <code>Medien</code>.
+Die Mediendatei können beliebige wav-Files sein. Im Falle von mp3-Files ist darauf zu achten, dass unter Windows eine korrekte Wiedergaben nur gewährleistet ist, wenn das Format Layer-3, 44100 Hz, 320 kbps, stereo verwendet wird.
+In den weiteren Zeilen befindet sich</p>
+<ul>
+<li>in der ersten Spalte ein Timecode, entweder als Sekunden oder als Minuten und Sekunden (mm:ss) mit optionalen Millisekunden (mm:ss,xxx),</li>
+<li>das Trennzeichen (#),</li>
+<li>in der zweiten Spalte eine Überschrift</li>
+<li>das Trennzeichen (#),</li>
+<li>ein Erläuterungstext. Dieser kann nach einem weiteren Trennzeichen (#) und s, m oder l wie small, medium, large als mit kleiner, normaler oder großer Schriftart formatiert gekennzeichnet werden. Die Voreinstellung ist medium.</li>
+<li>Optional kann nach zwei %% ein Kommentar folgen, der im Programmfenster unten ausgegeben wird.</li>
+
+</ul>
+<p>Die Überschrift und der Erläuterungstext werden exakt dann ausgegeben, wenn die Zeitangabe zu Beginn der Spalte erreicht ist.</p>
+<h3 id='alternatives-format-für-überschrift-und-erläuterungen'>Alternatives Format für Überschrift und Erläuterungen</h3>
+<p>Alternativ kann nach der Zeitangabe auch html-Code stehen, beispielsweise</p>
+<p><code>00:10,123#&lt;h1&gt;Dies ist eine Überschrift&lt;/h1&gt;&lt;h2&gt;Unterüberschrift&lt;/h2&gt;&lt;p&gt;Erläuterungstext&lt;/p&gt;%%Kommentar</code></p>
+<p><a name="FormatSounddateien"></a></p>
+<h2 id='format-der-sounddateien'>Format der Sounddateien</h2>
+<p>Wave-Dateien werden unter Windows und Linux korrekt wiedergegeben.
+Sollen mp3-Files zum Einsatz kommen, so werden sie unter Windows in Abhängigkeit von den installierten Codices und der Betriebssystemversion unter Umständen fehlerhaft wiedergegeben. Insbesondere sind Zeitangaben und -markieren fehlerhaft.
+Dies lässt sich vermeiden, wenn mp3 - Dateien folgendes Format haben:
+<code>Layer-3, 44100 Hz, 320 kbps, stereo</code></p>
+<p><a name="Lizenz"></a></p>
+<h2 id='lesser-general-public-license'>Lesser General Public License</h2>
+<p>This program is free software; you can redistribute it and/or modify it under the terms of the LGP Lesser General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+You should have received a copy of the GNU General Public License along with this program; if not, write to:
+Free Software Foundation, Inc.
+51 Franklin Street, Suite 500
+Boston, MA  02110-1335, USA.</p>
+<p><a href='http://www.fsf.org' target='_blank' class='url'>www.fsf.org</a></p>
+<p>GNU LESSER GENERAL PUBLIC LICENSE</p>
+<p>Version 3, 29 June 2007</p>
+<p>Copyright © 2007 Free Software Foundation, Inc. <a href='http://fsf.org/' target='_blank' class='url'>http://fsf.org/</a></p>
+<p>Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.</p>
+<p>This version of the GNU Lesser General Public License incorporates the terms and conditions of version 3 of the GNU General Public License, supplemented by the additional permissions listed below.</p>
+<ol start='0' >
+<li>Additional Definitions.</li>
+
+</ol>
+<p>As used herein, “this License” refers to version 3 of the GNU Lesser General Public License, and the “GNU GPL” refers to version 3 of the GNU General Public License.</p>
+<p>“The Library” refers to a covered work governed by this License, other than an Application or a Combined Work as defined below.</p>
+<p>An “Application” is any work that makes use of an interface provided by the Library, but which is not otherwise based on the Library. Defining a subclass of a class defined by the Library is deemed a mode of using an interface provided by the Library.</p>
+<p>A “Combined Work” is a work produced by combining or linking an Application with the Library. The particular version of the Library with which the Combined Work was made is also called the “Linked Version”.</p>
+<p>The “Minimal Corresponding Source” for a Combined Work means the Corresponding Source for the Combined Work, excluding any source code for portions of the Combined Work that, considered in isolation, are based on the Application, and not on the Linked Version.</p>
+<p>The “Corresponding Application Code” for a Combined Work means the object code and/or source code for the Application, including any data and utility programs needed for reproducing the Combined Work from the Application, but excluding the System Libraries of the Combined Work.</p>
+<ol start='' >
+<li>Exception to Section 3 of the GNU GPL.</li>
+
+</ol>
+<p>You may convey a covered work under sections 3 and 4 of this License without being bound by section 3 of the GNU GPL.</p>
+<ol start='2' >
+<li>Conveying Modified Versions.</li>
+
+</ol>
+<p>If you modify a copy of the Library, and, in your modifications, a facility refers to a function or data to be supplied by an Application that uses the facility (other than as an argument passed when the facility is invoked), then you may convey a copy of the modified version:</p>
+<pre><code>a) under this License, provided that you make a good faith effort to ensure that, in the event an Application does not supply the function or data, the facility still operates, and performs whatever part of its purpose remains meaningful, or
+b) under the GNU GPL, with none of the additional permissions of this License applicable to that copy.
+</code></pre>
+<ol start='3' >
+<li>Object Code Incorporating Material from Library Header Files.</li>
+
+</ol>
+<p>The object code form of an Application may incorporate material from a header file that is part of the Library. You may convey such object code under terms of your choice, provided that, if the incorporated material is not limited to numerical parameters, data structure layouts and accessors, or small macros, inline functions and templates (ten or fewer lines in length), you do both of the following:</p>
+<pre><code>a) Give prominent notice with each copy of the object code that the Library is used in it and that the Library and its use are covered by this License.
+b) Accompany the object code with a copy of the GNU GPL and this license document.
+</code></pre>
+<ol start='4' >
+<li>Combined Works.</li>
+
+</ol>
+<p>You may convey a Combined Work under terms of your choice that, taken together, effectively do not restrict modification of the portions of the Library contained in the Combined Work and reverse engineering for debugging such modifications, if you also do each of the following:</p>
+<pre><code>a) Give prominent notice with each copy of the Combined Work that the Library is used in it and that the Library and its use are covered by this License.
+b) Accompany the Combined Work with a copy of the GNU GPL and this license document.
+c) For a Combined Work that displays copyright notices during execution, include the copyright notice for the Library among these notices, as well as a reference directing the user to the copies of the GNU GPL and this license document.
+d) Do one of the following:
+    0) Convey the Minimal Corresponding Source under the terms of this License, and the Corresponding Application Code in a form suitable for, and under terms that permit, the user to recombine or relink the Application with a modified version of the Linked Version to produce a modified Combined Work, in the manner specified by section 6 of the GNU GPL for conveying Corresponding Source.
+    1) Use a suitable shared library mechanism for linking with the Library. A suitable mechanism is one that (a) uses at run time a copy of the Library already present on the user&#39;s computer system, and (b) will operate properly with a modified version of the Library that is interface-compatible with the Linked Version.
+e) Provide Installation Information, but only if you would otherwise be required to provide such information under section 6 of the GNU GPL, and only to the extent that such information is necessary to install and execute a modified version of the Combined Work produced by recombining or relinking the Application with a modified version of the Linked Version. (If you use option 4d0, the Installation Information must accompany the Minimal Corresponding Source and Corresponding Application Code. If you use option 4d1, you must provide the Installation Information in the manner specified by section 6 of the GNU GPL for conveying Corresponding Source.)
+</code></pre>
+<ol start='5' >
+<li>Combined Libraries.</li>
+
+</ol>
+<p>You may place library facilities that are a work based on the Library side by side in a single library together with other library facilities that are not Applications and are not covered by this License, and convey such a combined library under terms of your choice, if you do both of the following:</p>
+<pre><code>a) Accompany the combined library with a copy of the same work based on the Library, uncombined with any other library facilities, conveyed under the terms of this License.
+b) Give prominent notice with the combined library that part of it is a work based on the Library, and explaining where to find the accompanying uncombined form of the same work.
+</code></pre>
+<ol start='6' >
+<li>Revised Versions of the GNU Lesser General Public License.</li>
+
+</ol>
+<p>The Free Software Foundation may publish revised and/or new versions of the GNU Lesser General Public License from time to time. Such new versions will be similar in spirit to the present version, but may differ in detail to address new problems or concerns.</p>
+<p>Each version is given a distinguishing version number. If the Library as you received it specifies that a certain numbered version of the GNU Lesser General Public License “or any later version” applies to it, you have the option of following the terms and conditions either of that published version or of any later version published by the Free Software Foundation. If the Library as you received it does not specify a version number of the GNU Lesser General Public License, you may choose any version of the GNU Lesser General Public License ever published by the Free Software Foundation.</p>
+<p>If the Library as you received it specifies that a proxy can decide whether future versions of the GNU Lesser General Public License shall apply, that proxy&#39;s public statement of acceptance of any version is permanent authorization for you to choose that version for the Library.</p>
+</body>
+</html>

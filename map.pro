@@ -12,31 +12,31 @@ TARGET = map
 TEMPLATE = app
 
 SOURCES += main.cpp\
+    about.cpp \
         mapmainwindow.cpp \
     aufgabenliste.cpp \
     aufgabe.cpp \
     dialog.cpp \
     mdutils.cpp \
-    aboutdlg.cpp \
     helpbrowser.cpp \
     editierbareaufgabe.cpp \
     mdlistwidgetwithdrop.cpp \
     mdplaintexteditwithdrop.cpp
 
 HEADERS  += mapmainwindow.h \
+    about.h \
     aufgabenliste.h \
     aufgabe.h \
     dialog.h \
     mdutils.h \
-    aboutdlg.h \
     helpbrowser.h \
     editierbareaufgabe.h \
     mdlistwidgetwithdrop.h \
     mdplaintexteditwithdrop.h
 
 FORMS    += mapmainwindow.ui \
-    dialog.ui \
-    aboutdlg.ui
+    about.ui \
+    dialog.ui
 
 RESOURCES += \
     mapressources.qrc
