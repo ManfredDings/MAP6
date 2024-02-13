@@ -908,9 +908,6 @@
          <property name="layoutDirection">
           <enum>Qt::RightToLeft</enum>
          </property>
-         <property name="text">
-          <string/>
-         </property>
         </widget>
        </item>
        <item>

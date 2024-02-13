@@ -21,8 +21,7 @@ const QString CVERSIONSNUMMER ="5.1 2024-02-11";
 
 const QString CVERSIONSTEXT = "MAP "+
         CVERSIONSNUMMER+QObject::tr("\nCreated with Qt 6.1.6 under LPGL3. "
-        "You received\n a copy of LGPL3 with this program.\n"
-        "Foto: M. Dings (Orgel HfM Freiburg)");
+        "You received\n a copy of LGPL3 with this program.");
 
 const QString SFileHelpIndex = "Help.html";
 const QString SHelpDirectory = "";

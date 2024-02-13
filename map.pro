@@ -43,5 +43,8 @@ RESOURCES += \
 
 RC_FILE = map.rc
 
-VERSION = 5.0.1
+RC_ICONS = MainIcon.ico
+ICON = MainIcon2.icns
+
+VERSION = 5.1.0
 

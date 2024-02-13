@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("MAP5");
 
     QApplication a(argc, argv);
+
     QPixmap Pixmap(":/splash.png");
     QSplashScreen splash(Pixmap);
 
@@ -35,9 +36,8 @@ int main(int argc, char *argv[])
 
     // wait for WaitN Millisecs to show the splash-screen
     MapMainWindow w;
-    w.show();
-
+    QGuiApplication::setWindowIcon(QIcon(":MainIcon2.icns"));
    splash.finish(&w);
-
-    return a.exec();
+    w.show();
+return a.exec();
 }

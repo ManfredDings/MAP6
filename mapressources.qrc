@@ -1,9 +1,11 @@
 <RCC>
     <qresource prefix="/">
-        <file>MainIcon.png</file>
         <file>MainIcon2.png</file>
         <file>splash.png</file>
         <file>gesperrt.bmp</file>
         <file>map.rc</file>
+        <file>MainIcon2.icns</file>
+        <file>MainIcon.ico</file>
+        <file>MainIcon.png</file>
     </qresource>
 </RCC>

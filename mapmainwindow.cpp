@@ -19,7 +19,6 @@
 #include "mdlistwidgetwithdrop.h"
 #include "mapmainwindow.h"
 #include "ui_mapmainwindow.h"
-#include <QDebug>
 
 
 // Max. Länge für die Pfade in der Statusleiste
@@ -162,7 +161,7 @@ MapMainWindow::MapMainWindow(QWidget *parent) :
     mFadeTimer->setInterval(CFADINGTIMERINTERVAL);
     connect(mFadeTimer, SIGNAL(timeout()), this, SLOT(onFadeTimer()));
     setIsFading(0);
-    QString formatstrs = "00:00"+mDecimalPoint+"000 | 00:00 | 00:00 ";
+    QString formatstrs = "00:00" % mDecimalPoint % "000 | 00:00 | 00:00 ";
     mlabeltext = formatstrs+mPlaybackRateText;
     // Nach setupUi (nicht davor) Einstellungen laden
     msettings = new QSettings();
@@ -270,14 +269,14 @@ MapMainWindow::MapMainWindow(QWidget *parent) :
     mlblTimeGeometry = ui->lblTime->geometry();
     recentFiles = msettings->value("recentFiles").toStringList();
     UpdateRecentFileActions();
-    if (recentFiles.count() > 0) recentFileActions[0]->triggered();
+    if (recentFiles.count() > 0) emit recentFileActions[0]->triggered();
 
     QString afl = msettings->value(
                 "Aufgabenliste", "").toString();
     maufgabenliste->set_currentfilename(afl);
 
     QRegularExpression rx("(([0-5]?[0-9]:)?[0-5][0-9](["
-               + mDecimalPoint+"][0-9]?[0-9]?[0-9]?)?)");
+               % mDecimalPoint % "][0-9]?[0-9]?[0-9]?)?)");
     QRegularExpressionValidator *valTime;
     valTime = new QRegularExpressionValidator(rx, this);
     ui->lineEditCurrentTime->setValidator(valTime);
@@ -295,6 +294,7 @@ MapMainWindow::MapMainWindow(QWidget *parent) :
     {
       mDocPath = QStandardPaths::locate(QStandardPaths::DocumentsLocation, sdummy, QStandardPaths::LocateDirectory);
       mDocPath = mDocPath + SBeispielAufgabenliste;
+      // Beispieldatei laden wird wohl nur unter Windows funktionieren.
       if (QFileInfo::exists(mDocPath))
       {
         AufgabenlisteLaden(mDocPath);
@@ -312,6 +312,9 @@ MapMainWindow::MapMainWindow(QWidget *parent) :
           if (!ZweitfensterVisible && showPopup) setShowZweitfenster(true);
       }
     }
+    // Auf jeden Fall den Play-Button enablen. Ist unschädlich, auch wenn keine Datei geladen wurde.
+    // Sonst kann es bei leerer Registry (erster Programmstart) Probleme geben.
+    on_audioavailablechanges(true);
 }
 
 // Läd eine Aufgabenliste
@@ -419,20 +422,20 @@ void MapMainWindow::resizeEvent(QResizeEvent *event)
 
 
         const int spc = 5;
-        int statusbarheight = spc;
-        if (ui->statusBar->isVisible())
+        int statusbarheight = 0;
+  //      if (ui->statusBar->isVisible())
         {
-            statusbarheight = ui->statusBar->height() + spc;
+            statusbarheight = ui->statusBar->height();
         };
 
         double fac = 1.0;
         if (ui->lwAufgabenDetails->isVisible()){
-            fac = 1.8;
+            fac = 1.45;
         }
 
         int aheight = (this->height()-ui->lwAufgaben->y()) / fac;
 
-        ui->lwAufgaben->setFixedHeight(aheight);
+        ui->lwAufgaben->setFixedHeight(aheight - 2* statusbarheight);
 
         int diff = ui->listWidget->geometry().top() - ui->lwAufgaben->geometry().top();
         ui->listWidget->setGeometry(ui->listWidget->geometry().left(),ui->listWidget->geometry().top(),
@@ -593,7 +596,8 @@ int MapMainWindow::volumeStandard() const
 void MapMainWindow::setVolumeStandard(int volumeStandard)
 {
     mVolumeStandard = volumeStandard;
-    QString s = QString::number(mVolumeStandard);
+    int vlm = trunc(mVolume * 100.0 / cVolumeRange);
+    QString s = QString::number(vlm);
     ui->btnVolStandard->setText(s);
 }
 bool MapMainWindow::stoppuhronly() const
@@ -691,19 +695,23 @@ void MapMainWindow::setVolume(int volume)
     QLocale loc;
     QString s;
     double x = CurrentVolumeToDecibels();
-    s = loc.toString(x, 'f', 2);
-    if (x >= 0) s = " +"+s;
-    else
-        if (x >- 10) s = " "+s;
-    QString vls = QString::number(mVolume);
+    s = loc.toString(x, 'f', 1);
+    if (x>=0) {s = "   " % s; }
+    else {
+        if (x >- 100) s = " " % s;
+        if (x >- 10) s = " " % s;
+    }
+
+    int vlm = trunc(mVolume * 100.0 / cVolumeRange);
+    QString vls = QString::number(vlm);
     if (cVolumeRange>999)
     {
-        if (mVolume < 1000) vls = " "+vls;
+        if (vlm < 1000) vls = " " % vls;
     }
-    if (mVolume < 100) vls = " "+vls;
-    if (mVolume < 10) vls = " "+vls;
+    if (vlm < 100) vls = " " % vls;
+    if (vlm < 10) vls = " " % vls;
 
-    ui->lbldB->setText(s + " dB "+vls+"%");
+    ui->lbldB->setText(s % " dB "% vls % "%");
     bool enable = volume < volumeStandard();
     ui->btnFadeIn->setEnabled(enable);
     ui->actionFade_in->setEnabled(enable);
@@ -770,7 +778,7 @@ void MapMainWindow::openMp3File(QString filename)
 QString MapMainWindow::millisecs2QTime(quint64 msec, QString &withmillisec)
 {
     QTime time = QTime::fromMSecsSinceStartOfDay(msec);
-    withmillisec = time.toString("mm:ss" + mDecimalPoint + "zzz");
+    withmillisec = time.toString("mm:ss" % mDecimalPoint % "zzz");
     return time.toString("mm:ss");
 }
 bool MapMainWindow::clearSreenWhenStop() const
@@ -890,16 +898,16 @@ void MapMainWindow::on_mediapositionchanges()
         on_actionStop_triggered();
         pos = 0;
     }
-    QString withmillisec, s2;
-    QString s = millisecs2QTime(pos, withmillisec);
+    QString wm, s2;
+    QString s = millisecs2QTime(pos, wm);
     if (getKeineStoppuhr()) s = "";
     ui->lblTime->setText(s);
     zweitfenster->lbltime->setText(s);
     // muss vorzeichenbehaftet sein, wg. Differenz
     // Auf Sekunden runden
     qint64 d = duration-pos;
-    withmillisec +=" | " + millisecs2QTime(d, s2)+" | ";
-    withmillisec += millisecs2QTime(duration, s2)+ " " + mPlaybackRateText;
+    QString withmillisec = wm % " | " % millisecs2QTime(d, s2) % " | "
+    % millisecs2QTime(duration, s2) % " " % mPlaybackRateText;
     if ((duration > 0) && (pos >= 0))
         ui->labelMediaPos->setText(withmillisec);
     ui->hSlider->setValue(pos);
@@ -918,7 +926,7 @@ int MapMainWindow::volume2Faderposition()
     double linearVolume = QAudio::convertVolume(rvolume,
                                                 QAudio::LinearVolumeScale,
                                                 QAudio::LogarithmicVolumeScale);
-    return linearVolume*cVolumeRange+0.5;//runden
+    return qRound(linearVolume*cVolumeRange);//runden
 }
 
 void MapMainWindow::on_mediavolumechanges()
@@ -929,20 +937,17 @@ void MapMainWindow::on_mediavolumechanges()
 
 void MapMainWindow::setInfo()
 {
-    QString s="";
+    QString s=" ";
 
-     s+=" ";
-    if (showFileInformations()) s+=" <font color=#0000aa>" +
+    if (showFileInformations()) s=s % " <font color=#0000aa>" %
             truncateFilename(mcurrent_aufgabe->getMaudiofilename(),
                              CMAXPATHLENFORDISPLAY+10);
-    s+="</p>";
-    statuslabel->setText(s);
+    statuslabel->setText(s % "</p>");
     if (showAufgabenFileInformations())
     {
-        QString s2 = "<p><font color=#000000>" +
-            truncateFilename(maufgabefilename, CMAXPATHLENFORDISPLAY-10) +
-                "</p>";
-        statuslabel2->setText(s2);
+        statuslabel2->setText("<p><font color=#000000>" %
+                              truncateFilename(maufgabefilename, CMAXPATHLENFORDISPLAY-10)
+                              %  "</p>");
     }
     else statuslabel2->setText("");
 }
@@ -1148,8 +1153,8 @@ void MapMainWindow::AufgabeInEditorLaden()
             ui->Aufgabeneditor->appendPlainText(s);
         }
         mEditierbareAufgabe.setFilename(
-                    mcurrent_aufgabe->getMcurrentdir() +
-                    "/" + mcurrent_aufgabe->get_currentfilename());
+                    mcurrent_aufgabe->getMcurrentdir() %
+                    "/" % mcurrent_aufgabe->get_currentfilename());
         ui->label_2->setText(mEditierbareAufgabe.title());
     }
 }
@@ -1328,7 +1333,7 @@ void MapMainWindow::on_pushButton_clicked()
         {
             mplayer->setPosition(ms);
             QTime tm = QTime::fromMSecsSinceStartOfDay(ms);
-            QString txt = tm.toString("mm:ss"+mDecimalPoint+"zzz");
+            QString txt = tm.toString("mm:ss" % mDecimalPoint % "zzz");
             insertToCueHistory(txt);
         }
     }
@@ -1357,7 +1362,7 @@ void MapMainWindow::on_pushButtonClear_clicked()
 void MapMainWindow::on_pushButtonPickup_clicked()
 {
     QTime tm = QTime::fromMSecsSinceStartOfDay(mplayer->position());
-    QString txt = tm.toString("mm:ss"+mDecimalPoint+"zzz");
+    QString txt = tm.toString("mm:ss" % mDecimalPoint % "zzz");
     ui->lineEditCurrentTime->setText(txt);
     insertToCueHistory(txt);
 }
@@ -1629,7 +1634,7 @@ void MapMainWindow::on_actionAufgabe_bearbeiten_triggered()
 {
     int index = ui->lwAufgaben->currentRow();
     QString s = maufgabenliste->getMdataList().value(index);
-    s = maufgabenliste->getMcurrentpath()+"/"+s;
+    s = maufgabenliste->getMcurrentpath() % "/" % s;
     raiseFileWithExternalSoftware(s);
 }
 
@@ -1927,7 +1932,7 @@ void MapMainWindow::on_pushButtonAdd2History_clicked()
         if (ms < mplayer->duration())
         {
             QTime tm = QTime::fromMSecsSinceStartOfDay(ms);
-            QString txt = tm.toString("mm:ss"+mDecimalPoint+"zzz");
+            QString txt = tm.toString("mm:ss" % mDecimalPoint % "zzz");
             insertToCueHistory(txt);
         }
     }
@@ -2129,7 +2134,8 @@ void MapMainWindow::on_hSlider_sliderReleased()
 
 void MapMainWindow::applyVolume(int volumeSliderValue)
 {
-    qreal linearVolume = QAudio::convertVolume(volumeSliderValue / qreal(cVolumeRange),
+    double vol = qreal(volumeSliderValue) / qreal(cVolumeRange);
+    qreal linearVolume = QAudio::convertVolume(vol,
         QAudio::LogarithmicVolumeScale, QAudio::LinearVolumeScale);
     mAudioOutput->setVolume(linearVolume);
 }
