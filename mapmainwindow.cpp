@@ -596,7 +596,7 @@ int MapMainWindow::volumeStandard() const
 void MapMainWindow::setVolumeStandard(int volumeStandard)
 {
     mVolumeStandard = volumeStandard;
-    int vlm = trunc(mVolume * 100.0 / cVolumeRange);
+    int vlm = trunc(mVolumeStandard * 100.0 / cVolumeRange);
     QString s = QString::number(vlm);
     ui->btnVolStandard->setText(s);
 }
@@ -1381,7 +1381,6 @@ void MapMainWindow::on_btnMute_clicked()
 void MapMainWindow::on_btnToStandardvolume_clicked()
 {
     applyVolume(volumeStandard());
-    //mAudioOutput->setVolume(volumeStandard());
 }
 
 void MapMainWindow::on_actionNormalansicht_triggered()

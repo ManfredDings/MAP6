@@ -16,7 +16,7 @@
 /**************************************************
     *Dies regelmäßig anpassen
     */
-const QString CVERSIONSNUMMER ="5.1 2024-02-11";
+const QString CVERSIONSNUMMER ="5.1.1 2024-02-13";
 /* **********************************************/
 
 const QString CVERSIONSTEXT = "MAP "+
